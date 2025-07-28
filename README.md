@@ -5,6 +5,26 @@ This PowerShell script (`AtomicRedTeam-Setup-And-Runner.ps1`) automates the down
 
 ---
 
+## Quick Install (One-Liner)
+
+**English:**
+
+To directly download and run the script from GitHub, use this PowerShell command:
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Akash-CyberSamurai/AtomicRedWithGUI/main/AtomicRedTeam-Setup-And-Runner.ps1" -OutFile "AtomicRedTeam-Setup-And-Runner.ps1"; PowerShell -ExecutionPolicy Bypass -File .\AtomicRedTeam-Setup-And-Runner.ps1
+```
+
+**Hindi:**
+
+GitHub से स्क्रिप्ट को सीधे डाउनलोड और चलाने के लिए यह PowerShell कमांड चलाएँ:
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Akash-CyberSamurai/AtomicRedWithGUI/main/AtomicRedTeam-Setup-And-Runner.ps1" -OutFile "AtomicRedTeam-Setup-And-Runner.ps1"; PowerShell -ExecutionPolicy Bypass -File .\AtomicRedTeam-Setup-And-Runner.ps1
+```
+
+---
+
 ## Features
 - **Automatic Download & Setup:** Fetches Atomic Red Team repo and required PowerShell module.
 - **Interactive Menu:** Browse all techniques, search by keyword, and execute tests/subtests.
