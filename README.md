@@ -7,7 +7,6 @@ This PowerShell script (`AtomicRedTeam-Setup-And-Runner.ps1`) automates the down
 
 ## Quick Install (One-Liner)
 
-**English:**
 
 To directly download and run the script from GitHub, use this PowerShell command:
 
