@@ -42,7 +42,4 @@ Write-Host "You can find a list of techniques at https://www.atomicredteam.io/at
 Write-Host "Example:"
 Write-Host "Invoke-AtomicTest T1021.006-1" -ForegroundColor Yellow
 
-# Keep the window open
-while ($true) {
-    Start-Sleep -Seconds 3600
-} 
+# Script ends here, user gets prompt back 
