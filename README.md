@@ -8,6 +8,8 @@ To directly download and run the script from GitHub, use this PowerShell command
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Akash-CyberSamurai/AtomicRedWithGUI/main/AtomicRedTeam-Setup-And-Runner.ps1" -OutFile "AtomicRedTeam-Setup-And-Runner.ps1"; PowerShell -ExecutionPolicy Bypass -File .\AtomicRedTeam-Setup-And-Runner.ps1
 ```
 
+> **Note:** `$ProgressPreference = 'SilentlyContinue'` is used to speed up downloads on PowerShell versions lower than 6.1.
+
 ---
 
 ## Overview
@@ -45,6 +47,17 @@ This PowerShell script automates the download, extraction, and setup of Atomic R
    Invoke-AtomicTest T1003 -ShowDetails
    Invoke-AtomicTest T1003 -TestNumbers 1 -GetPrereqs -Execute
    ```
+
+---
+
+## Example Usage
+To perform a test, use `Invoke-AtomicTest` followed by the technique you want to test. You can find a list of techniques at:
+https://www.atomicredteam.io/atomic-red-team
+
+**Example:**
+```powershell
+Invoke-AtomicTest T1021.006-3
+```
 
 ---
 
