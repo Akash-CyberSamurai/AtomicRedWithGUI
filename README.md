@@ -1,9 +1,4 @@
-# Atomic Red Team Setup & Runner Script
-
-## Overview
-This PowerShell script (`AtomicRedTeam-Setup-And-Runner.ps1`) automates the download, setup, and interactive execution of [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team) tests on Windows. It provides a text-based menu for browsing, searching, and running tests or subtests manually.
-
----
+# Atomic Red Team Quick Setup Script
 
 ## Quick Install (One-Liner)
 
@@ -15,44 +10,49 @@ $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri "https://raw.gi
 
 ---
 
+## Overview
+This PowerShell script automates the download, extraction, and setup of Atomic Red Team on Windows. After running the script, you can manually execute Atomic Red Team tests using PowerShell commands.
+
+---
+
 ## Features
-- **Automatic Download & Setup:** Fetches Atomic Red Team repo and required PowerShell module.
-- **Interactive Menu:** Browse all techniques, search by keyword, and execute tests/subtests.
-- **Manual Execution:** Choose and run any test interactively.
-- **No GUI:** Uses a text-based menu in the PowerShell terminal.
+- Downloads the latest Atomic Red Team release from GitHub
+- Extracts it to `C:\AtomicRedTeam`
+- Installs required PowerShell modules: `invoke-atomicredteam` and `powershell-yaml`
+- Imports the `Invoke-AtomicRedTeam` module
+- Sets the `ATOMICS_PATH` environment variable
+- Leaves the PowerShell window open for you to run tests manually
 
 ---
 
 ## Prerequisites
 - Windows 10 or later
 - PowerShell 5.1 or newer
-- Internet connection (for initial setup)
-- Run PowerShell as Administrator (recommended for some tests)
+- Run PowerShell as Administrator (required for extracting to `C:\` and installing modules)
+- Internet connection (for downloading files and modules)
 
 ---
 
 ## Usage
-1. **Download the script:**
-   Place `AtomicRedTeam-Setup-And-Runner.ps1` in a folder of your choice.
-
+1. **Download the script** and place it anywhere on your system.
 2. **Open PowerShell as Administrator.**
-
 3. **Run the script:**
    ```powershell
    .\AtomicRedTeam-Setup-And-Runner.ps1
    ```
-
-4. **Follow the on-screen menu:**
-   - Browse all techniques
-   - Search for tests by keyword
-   - View details and execute tests/subtests
+4. **After setup completes,** the window will remain open. You can now run Atomic Red Team tests manually, for example:
+   ```powershell
+   Invoke-AtomicTest T1003 -ShowDetails
+   Invoke-AtomicTest T1003 -TestNumbers 1 -GetPrereqs -Execute
+   ```
 
 ---
 
 ## Notes
-- **No GUI:** This script uses a text-based menu, not a graphical interface.
-- **First run:** The script will download and extract the Atomic Red Team repository and required module.
-- **Permissions:** Some tests may require elevated privileges (run as Administrator).
-- **For more info:** Visit [Atomic Red Team GitHub](https://github.com/redcanaryco/atomic-red-team)
+- The script will extract Atomic Red Team to `C:\AtomicRedTeam` (existing folder will be overwritten if present).
+- You must run as Administrator for full functionality.
+- `$ProgressPreference = 'SilentlyContinue'` is used to speed up downloads.
+- The script installs modules for the current user only.
+- For more information, visit the [Atomic Red Team GitHub](https://github.com/redcanaryco/atomic-red-team).
 
 --- 
