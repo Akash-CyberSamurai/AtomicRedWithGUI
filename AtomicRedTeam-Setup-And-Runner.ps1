@@ -8,7 +8,8 @@ $ProgressPreference = 'SilentlyContinue'
 $AtomicRepoUrl = "https://github.com/redcanaryco/atomic-red-team/archive/refs/heads/master.zip"
 $AtomicZip = "$PSScriptRoot\atomic-red-team.zip"
 $AtomicDir = "$PSScriptRoot\atomic-red-team-master"
-$AtomicModule = "Invoke-AtomicRedTeam"
+$AtomicModule = "AtomicRedTeam"
+$AtomicModuleCmd = "Invoke-AtomicTest"
 $AtomicModuleUrl = "https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/Invoke-AtomicRedTeam.psm1"
 $AtomicModulePath = "$PSScriptRoot\Invoke-AtomicRedTeam.psm1"
 
@@ -22,13 +23,28 @@ function Download-AtomicRedTeam {
 }
 
 function Download-AtomicModule {
-    Write-Host "[+] Downloading Invoke-AtomicRedTeam module..." -ForegroundColor Cyan
+    Write-Host "[+] Downloading Invoke-AtomicRedTeam module (.psm1 fallback)..." -ForegroundColor Cyan
     Invoke-WebRequest -Uri $AtomicModuleUrl -OutFile $AtomicModulePath -UseBasicParsing
+}
+
+function Install-AtomicModuleFromGallery {
+    Write-Host "[+] Attempting to install AtomicRedTeam module from PowerShell Gallery..." -ForegroundColor Cyan
+    try {
+        Install-Module -Name $AtomicModule -Scope CurrentUser -Force -ErrorAction Stop
+        return $true
+    } catch {
+        Write-Host "[-] Failed to install from gallery: $_" -ForegroundColor Yellow
+        return $false
+    }
 }
 
 function Import-AtomicModule {
     if (-not (Get-Module -ListAvailable | Where-Object { $_.Name -eq $AtomicModule })) {
-        if (-not (Test-Path $AtomicModulePath)) {
+        $installed = Install-AtomicModuleFromGallery
+        if ($installed) {
+            Import-Module $AtomicModule -Force
+            return
+        } elseif (-not (Test-Path $AtomicModulePath)) {
             Download-AtomicModule
         }
         Import-Module $AtomicModulePath -Force
