@@ -2,6 +2,8 @@
 # Language: PowerShell
 # Purpose: Download, setup, and interactively run Atomic Red Team tests on Windows
 
+$ProgressPreference = 'SilentlyContinue'
+
 # --- CONFIGURATION ---
 $AtomicRepoUrl = "https://github.com/redcanaryco/atomic-red-team/archive/refs/heads/master.zip"
 $AtomicZip = "$PSScriptRoot\atomic-red-team.zip"
